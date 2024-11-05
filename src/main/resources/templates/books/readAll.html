@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All books</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="item_list" th:each="book : ${books}">
+    <p class="item_list__title"> Назва книги, автор: </p>
+    <div class="item_list__item">
+    <a th:href="@{/books/{id}(id = ${book.getId()})}"
+       th:text="${book.getName()} + ', ' +  ${book.getAuthor()}">NAME OF BOOK
+    </a>
+    <a th:href="@{/books/{id}/edit(id=${book.getId()})}">Змінити книгу</a>
+    <form th:method="DELETE"
+          th:action="@{/books/{id}/delete(id=${book.getId()})}">
+        <input type="hidden" name="_method" value="DELETE"/>
+        <input type="submit" value="Видалити книгу">
+    </form>
+    </div>
+</div>
+<a href="/books/new">
+   Додати нову книгу
+</a>
+</body>
+</html>

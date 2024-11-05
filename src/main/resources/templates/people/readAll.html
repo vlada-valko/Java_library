@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All people</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="item_list" th:each="person : ${people}">
+    <p class="item_list__title"> Особа:  </p>
+    <div class="item_list__item">
+<a th:href="@{/people/{id}(id = ${person.getId()})}"
+   th:text="${person.getFullName()}">PERSON</a>
+
+    <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Змінити користувача</a>
+    <form th:method="DELETE"
+          th:action="@{/people/{id}/delete(id=${person.getId()})}">
+        <input type="hidden" name="_method" value="DELETE"/>
+        <input type="submit" value="Видалити користувача">
+    </form>
+    </div>
+</div>
+<a href="/people/new">
+    Створити нового користувача
+</a>
+</body>
+</html>

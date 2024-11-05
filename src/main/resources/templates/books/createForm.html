@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<form th:method="POST" th:action="@{/books}" th:object="${book}">
+    <label for="name">NAME</label>
+    <input type="text" th:field="*{name}" id="name" />
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name of error</p>
+    <br/>
+    <label for="author">author</label>
+    <input type="text" th:field="*{author}" id="author" />
+    <p th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Name of error</p>
+    <br/>
+    <label for="yearOfProduction">yearOfProduction</label>
+    <input type="text" th:field="*{yearOfProduction}" id="yearOfProduction" />
+    <p th:if="${#fields.hasErrors('yearOfProduction')}" th:errors="*{yearOfProduction}">Name of error</p>
+    <br/>
+    <input type="submit" value="CREATE">
+</form>
+</body>
+</html>

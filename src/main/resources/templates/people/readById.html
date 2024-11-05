@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${person.getFullName()}">
+    </title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<p th:text="'ПІБ: ' + ${person.getFullName()}">ІМ'Я</p>
+<p th:text="'Вік: ' + ${person.getAge()}">ВІК</p>
+<div th:each="book : ${books}">
+<p th:text="${book.name}"></p>
+</div>
+<div class="item_list__item">
+<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Змінити користувача</a>
+<form  th:method="DELETE"
+      th:action="@{/people/{id}/delete(id=${person.getId()})}">
+    <input type="hidden" name="_method" value="DELETE"/>
+    <input type="submit" value="Видалити користувача">
+</form>
+</div>
+</body>
+</html>
